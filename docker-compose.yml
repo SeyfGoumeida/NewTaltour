@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: newtaltour-postgres
+    environment:
+      POSTGRES_USER: taltour_user
+      POSTGRES_PASSWORD: taltour_password_dev
+      POSTGRES_DB: newtaltour_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./packages/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taltour_user -d newtaltour_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (optional for later)
+  redis:
+    image: redis:7-alpine
+    container_name: newtaltour-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: newtaltour-network
