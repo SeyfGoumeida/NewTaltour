@@ -34,13 +34,15 @@ app.get('/api/health', (req, res) => {
 import authRoutes from './routes/auth';
 import vehicleRoutes from './routes/vehicles';
 import reservationRoutes from './routes/reservations';
+import paymentRoutes from './routes/payments';
+import adminRoutes from './routes/admin';
 
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/reservations', reservationRoutes);
-app.use('/api/payments', (req, res) => res.json({ message: 'Payment routes coming soon' }));
-app.use('/api/admin', (req, res) => res.json({ message: 'Admin routes coming soon' }));
+app.use('/api/payments', paymentRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
