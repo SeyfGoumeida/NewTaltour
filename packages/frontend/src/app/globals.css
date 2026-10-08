@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-900 text-soft antialiased;
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, rgba(47, 107, 255, 0.18), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(34, 211, 238, 0.07), transparent 60%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display text-white;
+}
+
+::selection {
+  background: rgba(47, 107, 255, 0.45);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #070E20; }
+::-webkit-scrollbar-thumb { background: #1E2D50; border-radius: 10px; border: 2px solid #070E20; }
+
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='datetime-local']::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .glass { @apply rounded-2xl border border-line bg-ink-850/70 shadow-card backdrop-blur-xl; }
+  .glass-soft { @apply rounded-xl border border-line bg-white/[0.03]; }
+  .text-grad { @apply bg-grad-text bg-clip-text text-transparent; }
+  .label { @apply mb-1.5 block text-xs font-medium text-muted; }
+  .field {
+    @apply w-full rounded-xl border border-line bg-ink-950/60 px-3.5 py-2.5 text-sm text-white placeholder:text-muted/70
+      outline-none transition focus:border-brand-blue/70 focus:ring-2 focus:ring-brand-blue/25 disabled:opacity-50;
+  }
+  .field-light {
+    @apply w-full rounded-lg border-0 bg-transparent p-0 text-sm font-semibold text-ink-900 outline-none placeholder:text-slate-400;
+  }
+  .chip { @apply inline-flex items-center gap-1 rounded-full border border-line bg-white/[0.04] px-2.5 py-1 text-xs text-soft; }
+  .link { @apply text-brand-cyan underline-offset-4 hover:underline; }
+  .prose-taltour h2 { @apply mb-3 mt-8 text-xl font-bold first:mt-0; }
+  .prose-taltour h3 { @apply mb-2 mt-6 text-lg font-semibold; }
+  .prose-taltour p { @apply mb-4 leading-relaxed text-soft; }
+  .prose-taltour ul { @apply mb-4 space-y-2; }
+  .prose-taltour li { @apply relative pl-5 leading-relaxed text-soft before:absolute before:left-0 before:top-[0.6em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-accent; }
+  .prose-taltour a { @apply link; }
+}

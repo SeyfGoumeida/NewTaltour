@@ -1,28 +1,26 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import '../styles/globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Inter, Manrope } from 'next/font/google';
+import './globals.css';
+import { Providers } from '@/components/providers';
+import { getSite } from '@/lib/server';
 
-const inter = Inter({ subsets: ['latin'] });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const display = Manrope({ subsets: ['latin'], variable: '--font-display', weight: ['600', '700', '800'] });
 
-export const metadata: Metadata = {
-  title: 'NewTaltour - Location de Voitures',
-  description: 'Plateforme moderne de location de voitures',
-  keywords: 'location voiture, réservation, auto, taltour',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSite();
+  return {
+    title: { default: `${site.titre} | ${site.nom}`, template: `%s | ${site.nom}` },
+    description: `${site.slogan} Location de voitures en Algérie depuis ${site.entreprise.depuis} : livraison dans tous les aéroports, plus de 30 modèles, paiement sécurisé en ligne.`,
+  };
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const site = await getSite();
   return (
-    <html lang="fr">
-      <body className={inter.className}>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+    <html lang="fr" className={`${sans.variable} ${display.variable}`}>
+      <body id="top" className="min-h-screen font-sans">
+        <Providers site={site}>{children}</Providers>
       </body>
     </html>
   );

@@ -1,0 +1,830 @@
+[
+ {
+  "source_id": 1073,
+  "site": "ma",
+  "slug": "ma-clio-4-1073",
+  "name": "CLIO 4",
+  "display_name": "Clio 4",
+  "brand": "Renault",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 5,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "manuelle",
+  "gearbox": "Manuelle",
+  "power_hp": null,
+  "airbags": null,
+  "top_speed": 200,
+  "consumption": null,
+  "deposit": 300.0,
+  "prices": {
+   "1": 30.0,
+   "7": 210.0,
+   "14": 410.0,
+   "30": 800.0,
+   "90": 2400.0,
+   "180": 4200.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "ABS",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-clio-4-1073.jpeg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "5",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "6",
+    "Cylindrée": null,
+    "Turbo": false,
+    "Puissance": null,
+    "Boîte de vitesses": "MANUEL",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": "200"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "2",
+    "Aide au stationnement": null,
+    "Radio cd": "OUI",
+    "Écran": "OUI",
+    "Accoudoir": null
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": "OUI",
+    "Feux de jour": "OUI",
+    "Projecteur avant": "OUI",
+    "Feux arrière": "OUI",
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": "OUI",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "OUI",
+    "Keyless": null,
+    "Airbags": "OUI",
+    "Freins avant": "OUI",
+    "Freins arrière": "OUI",
+    "ABS": true,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1076,
+  "site": "ma",
+  "slug": "ma-dacia-logan-1076",
+  "name": "DACIA LOGAN",
+  "display_name": "Dacia Logan",
+  "brand": "Dacia",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 5,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "manuelle",
+  "gearbox": "Manuelle",
+  "power_hp": null,
+  "airbags": null,
+  "top_speed": 200,
+  "consumption": null,
+  "deposit": 300.0,
+  "prices": {
+   "1": 30.0,
+   "7": 200.0,
+   "14": 400.0,
+   "30": 750.0,
+   "90": 2100.0,
+   "180": 400.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "ABS",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-dacia-logan-1076.jpeg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "5",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "6",
+    "Cylindrée": null,
+    "Turbo": false,
+    "Puissance": null,
+    "Boîte de vitesses": "MANUEL",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": "200"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "2",
+    "Aide au stationnement": null,
+    "Radio cd": "OUI",
+    "Écran": null,
+    "Accoudoir": null
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": null,
+    "Feux de jour": "OUI",
+    "Projecteur avant": "OUI",
+    "Feux arrière": "OUI",
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": null,
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "OUI",
+    "Keyless": null,
+    "Airbags": "OUI",
+    "Freins avant": "OUI",
+    "Freins arrière": "OUI",
+    "ABS": true,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1081,
+  "site": "ma",
+  "slug": "ma-dacia-logan-1081",
+  "name": "DACIA LOGAN",
+  "display_name": "Dacia Logan",
+  "brand": "Dacia",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 4,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "manuelle",
+  "gearbox": "Manuelle",
+  "power_hp": 6,
+  "airbags": null,
+  "top_speed": null,
+  "consumption": "5",
+  "deposit": 300.0,
+  "prices": {
+   "1": 30.0,
+   "7": 200.0,
+   "14": 400.0,
+   "30": 750.0,
+   "90": 2100.0,
+   "180": 4000.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-dacia-logan-1081.jpeg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "4",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "3",
+    "Cylindrée": null,
+    "Turbo": false,
+    "Puissance": "6",
+    "Boîte de vitesses": null,
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": false,
+    "Consommation": "5"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "OUI",
+    "Aide au stationnement": null,
+    "Radio cd": "OUI",
+    "Écran": null,
+    "Accoudoir": null
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": null,
+    "Feux de jour": null,
+    "Projecteur avant": null,
+    "Feux arrière": null,
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": "OUI",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "OUI",
+    "Keyless": null,
+    "Airbags": "OUI",
+    "Freins avant": null,
+    "Freins arrière": null,
+    "ABS": false,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1083,
+  "site": "ma",
+  "slug": "ma-clio-4-1083",
+  "name": "CLIO 4",
+  "display_name": "Clio 4",
+  "brand": "Renault",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 4,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "automatique",
+  "gearbox": "Automatique",
+  "power_hp": 6,
+  "airbags": null,
+  "top_speed": null,
+  "consumption": "5",
+  "deposit": 300.0,
+  "prices": {
+   "1": 30.0,
+   "7": 210.0,
+   "14": 420.0,
+   "30": 800.0,
+   "90": 2400.0,
+   "180": 4500.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-clio-4-1083.jpg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "4",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "4",
+    "Cylindrée": null,
+    "Turbo": true,
+    "Puissance": "6",
+    "Boîte de vitesses": "Automatique",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": false,
+    "Consommation": "5"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "Oui",
+    "Aide au stationnement": "Oui",
+    "Radio cd": null,
+    "Écran": "Oui",
+    "Accoudoir": "Oui"
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": null,
+    "Feux de jour": null,
+    "Projecteur avant": null,
+    "Feux arrière": null,
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": "OUI",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "Oui",
+    "Keyless": null,
+    "Airbags": "Oui",
+    "Freins avant": null,
+    "Freins arrière": null,
+    "ABS": false,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1082,
+  "site": "ma",
+  "slug": "ma-clio-4-1082",
+  "name": "CLIO 4",
+  "display_name": "Clio 4",
+  "brand": "Renault",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 4,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "manuelle",
+  "gearbox": "Manuelle",
+  "power_hp": 6,
+  "airbags": null,
+  "top_speed": null,
+  "consumption": "5",
+  "deposit": 300.0,
+  "prices": {
+   "1": 35.0,
+   "7": 245.0,
+   "14": 490.0,
+   "30": 850.0,
+   "90": 2400.0,
+   "180": 4800.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-clio-4-1082.jpeg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "4",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "3",
+    "Cylindrée": null,
+    "Turbo": false,
+    "Puissance": "6",
+    "Boîte de vitesses": null,
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": false,
+    "Consommation": "5"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "OUI",
+    "Aide au stationnement": null,
+    "Radio cd": null,
+    "Écran": null,
+    "Accoudoir": null
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": null,
+    "Feux de jour": null,
+    "Projecteur avant": null,
+    "Feux arrière": null,
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": "OUI",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "OUI",
+    "Keyless": null,
+    "Airbags": "OUI",
+    "Freins avant": null,
+    "Freins arrière": null,
+    "ABS": false,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1084,
+  "site": "ma",
+  "slug": "ma-clio-4-automatique-1084",
+  "name": "CLIO 4 automatique",
+  "display_name": "Clio 4 Automatique",
+  "brand": "Renault",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 4,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "automatique",
+  "gearbox": "Automatique",
+  "power_hp": 6,
+  "airbags": null,
+  "top_speed": null,
+  "consumption": "5",
+  "deposit": 400.0,
+  "prices": {
+   "1": 35.0,
+   "7": 245.0,
+   "14": 490.0,
+   "30": 850.0,
+   "90": 2400.0,
+   "180": 4800.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-clio-4-automatique-1084.jpg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "4",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "4",
+    "Cylindrée": null,
+    "Turbo": true,
+    "Puissance": "6",
+    "Boîte de vitesses": "Automatique",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": false,
+    "Consommation": "5"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "Oui",
+    "Aide au stationnement": "Oui",
+    "Radio cd": null,
+    "Écran": "Oui",
+    "Accoudoir": "Oui"
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": null,
+    "Feux de jour": null,
+    "Projecteur avant": null,
+    "Feux arrière": null,
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": "OUI",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "Oui",
+    "Keyless": null,
+    "Airbags": "Oui",
+    "Freins avant": null,
+    "Freins arrière": null,
+    "ABS": false,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1074,
+  "site": "ma",
+  "slug": "ma-c3-1074",
+  "name": "C3",
+  "display_name": "C3",
+  "brand": "Citroën",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 5,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "diesel",
+  "transmission": "manuelle",
+  "gearbox": "Manuelle",
+  "power_hp": null,
+  "airbags": null,
+  "top_speed": 200,
+  "consumption": null,
+  "deposit": 300.0,
+  "prices": {
+   "1": 40.0,
+   "7": 210.0,
+   "14": 420.0,
+   "30": 900.0,
+   "90": 2700.0,
+   "180": 5400.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "ABS",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-c3-1074.jpg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "5",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "DIESEL",
+    "Nb cylindres": "6",
+    "Cylindrée": null,
+    "Turbo": false,
+    "Puissance": null,
+    "Boîte de vitesses": "MANUEL",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": "200"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "4",
+    "Aide au stationnement": null,
+    "Radio cd": "OUI",
+    "Écran": "OUI",
+    "Accoudoir": null
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": null,
+    "Feux de jour": "OUI",
+    "Projecteur avant": "OUI",
+    "Feux arrière": "OUI",
+    "Détecteur de luminosité": false,
+    "Peinture métalisée": "OUI",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "OUI",
+    "Keyless": null,
+    "Airbags": "OUI",
+    "Freins avant": "OUI",
+    "Freins arrière": "OUI",
+    "ABS": true,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": false,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1078,
+  "site": "ma",
+  "slug": "ma-seat-ibiza-1078",
+  "name": "Seat Ibiza",
+  "display_name": "Seat Ibiza",
+  "brand": "Seat",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 4,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "essence",
+  "transmission": "manuelle",
+  "gearbox": "Manuelle",
+  "power_hp": null,
+  "airbags": null,
+  "top_speed": null,
+  "consumption": null,
+  "deposit": 400.0,
+  "prices": {
+   "1": 40.0,
+   "7": 259.0,
+   "14": 490.0,
+   "30": 0.0,
+   "90": 900.0,
+   "180": 5400.0
+  },
+  "equipment": [
+   "Climatisation",
+   "ABS",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-seat-ibiza-1078.jpeg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "4",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "Essence",
+    "Nb cylindres": "3",
+    "Cylindrée": null,
+    "Turbo": true,
+    "Puissance": null,
+    "Boîte de vitesses": "Manuel",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": false
+   },
+   "Confort": {
+    "Direction assistée": false,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": true,
+    "Sellerie": null,
+    "Vitres éléctriques": "Oui",
+    "Aide au stationnement": null,
+    "Radio cd": null,
+    "Écran": "Oui",
+    "Accoudoir": "Oui"
+   },
+   "Look": {
+    "Toit ouvrant": true,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": "Oui",
+    "Feux de jour": null,
+    "Projecteur avant": "Oui",
+    "Feux arrière": "Oui",
+    "Détecteur de luminosité": true,
+    "Peinture métalisée": "Oui",
+    "Poignées et pare chocs": null
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "Oui",
+    "Keyless": null,
+    "Airbags": "Oui",
+    "Freins avant": null,
+    "Freins arrière": null,
+    "ABS": true,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": true,
+    "Aide au démarrage en côte": false
+   }
+  }
+ },
+ {
+  "source_id": 1079,
+  "site": "ma",
+  "slug": "ma-sandero-stepway-automatique-1079",
+  "name": "Sandero Stepway AUTOMATIQUE",
+  "display_name": "Sandero Stepway Automatique",
+  "brand": "Dacia",
+  "category": "B",
+  "category_label": "B",
+  "seats": 5,
+  "doors": 4,
+  "trunk_l": null,
+  "tank_l": null,
+  "fuel": "essence",
+  "transmission": "automatique",
+  "gearbox": "Automatique",
+  "power_hp": 6,
+  "airbags": null,
+  "top_speed": null,
+  "consumption": "5",
+  "deposit": 600.0,
+  "prices": {
+   "1": 40.0,
+   "7": 280.0,
+   "14": 560.0,
+   "30": 1200.0,
+   "90": 3600.0,
+   "180": 7200.0
+  },
+  "equipment": [
+   "Climatisation",
+   "Direction assistée",
+   "ABS",
+   "Verrouillage centralisé"
+  ],
+  "image": "/cars/ma-sandero-stepway-automatique-1079.jpeg",
+  "specs": {
+   "Véhicule": {
+    "Catégorie": "B",
+    "Nb places": "5",
+    "Portes": "4",
+    "Volume coffre": false,
+    "Réservoir": false,
+    "Dimensions véhicule": null,
+    "Empattement": false
+   },
+   "Moteur": {
+    "Carburant": "Essence",
+    "Nb cylindres": "3",
+    "Cylindrée": null,
+    "Turbo": true,
+    "Puissance": "6",
+    "Boîte de vitesses": "Automatique",
+    "Couple": null,
+    "Soupapes": false,
+    "Vitesse max.": false,
+    "Consommation": "5"
+   },
+   "Confort": {
+    "Direction assistée": true,
+    "Climatisation": true,
+    "Boîte à gants réfrigérante": false,
+    "Sellerie": null,
+    "Vitres éléctriques": "Oui",
+    "Aide au stationnement": "Oui",
+    "Radio cd": null,
+    "Écran": "OUI",
+    "Accoudoir": null
+   },
+   "Look": {
+    "Toit ouvrant": false,
+    "Vitres teintées": null,
+    "Projecteurs anti-brouillard": "Oui",
+    "Feux de jour": "OUI",
+    "Projecteur avant": null,
+    "Feux arrière": "Oui",
+    "Détecteur de luminosité": true,
+    "Peinture métalisée": "Oui",
+    "Poignées et pare chocs": "Oui"
+   },
+   "Sécurité": {
+    "Régulateur de vitesse": "Oui",
+    "Keyless": "Oui",
+    "Airbags": "Oui",
+    "Freins avant": "OUI",
+    "Freins arrière": "OUI",
+    "ABS": true,
+    "Verrouillage centralisé": true,
+    "Détecteur angle mort": true,
+    "Aide au démarrage en côte": true
+   }
+  }
+ }
+]

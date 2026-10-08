@@ -7,15 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces",
-    "build": "npm run build --workspaces",
-    "start": "npm start --workspaces",
-    "test": "npm test --workspaces",
-    "lint": "npm run lint --workspaces",
-    "type-check": "npm run type-check --workspaces",
+    "dev": "npm run dev -w packages/backend & npm run dev -w packages/frontend & wait",
+    "build": "npm run build -w packages/backend && npm run build -w packages/frontend",
+    "type-check": "npm run type-check -w packages/backend && npm run type-check -w packages/frontend",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "db:migrate": "npm run migrate -w packages/database"
+    "seed": "npm run seed -w packages/backend"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

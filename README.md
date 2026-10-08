@@ -1,139 +1,76 @@
-# 🚗 NewTaltour - Modern Car Rental Platform
+# NewTaltour
 
-A beautiful, secure, and modern redesign of taltour.com built with modern technologies.
+Refonte de [taltour.com](https://taltour.com) (location de voitures en Algérie, et au Maroc avec Ouziad Marrakech Cars) : mêmes fonctionnalités, mêmes données et mêmes textes en français, avec un nouveau design sombre.
 
-## ✨ Features
+- **Frontend** : Next.js 14 (App Router), Tailwind, `packages/frontend`
+- **API** : Express + PostgreSQL, `packages/backend`
+- **Base de données** : schéma `packages/database/schema.sql`, données taltour.com dans `packages/database/data/`
 
-- **Beautiful UI**: Modern, responsive design for mobile and desktop
-- **Secure**: Protected against SQL injection and authorization bypass vulnerabilities
-- **Fast**: Built with Next.js for optimal performance
-- **Scalable**: Monorepo architecture with clear separation of concerns
-- **Real-time**: Live availability and booking updates
+## Démarrage local
 
-## 🏗️ Architecture
-
-```
-NewTaltour/
-├── packages/
-│   ├── frontend/          # Next.js 14 + React 18 (Client-side)
-│   ├── backend/           # Node.js + Express (API)
-│   ├── database/          # PostgreSQL schema
-│   └── shared/            # Shared types & utilities
-├── docs/                  # Documentation
-├── legal/                 # Legal pages (Mentions légales, Privacy, etc.)
-└── docker-compose.yml     # Local development environment
-```
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **Next.js 14** - React framework with SSR
-- **React 18** - UI components
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **SWR** - Data fetching
-
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express** - Web framework
-- **TypeScript** - Type safety
-- **PostgreSQL** - Database
-- **JWT** - Authentication
-- **bcrypt** - Password hashing
-
-### Infrastructure
-- **Vercel** - Frontend hosting (free tier)
-- **Railway/Render** - Backend hosting
-- **Supabase** - PostgreSQL database (free tier)
-- **Docker** - Local development
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 18+
-- Docker & Docker Compose
-- Git
-
-### Local Development
+Prérequis : Node 18+ et Docker.
 
 ```bash
-# Clone repository
-git clone https://github.com/SeyfGoumeida/NewTaltour.git
-cd NewTaltour
-
-# Install dependencies
 npm install
-
-# Start local development environment
-docker-compose up -d
-
-# Run dev servers
-npm run dev
+cp packages/backend/.env.example packages/backend/.env
+cp packages/frontend/.env.example packages/frontend/.env.local
+docker compose up -d postgres
+npm run seed        # recrée le schéma et charge toutes les données
+npm run dev         # API sur :3001, site sur :3000
 ```
 
-This will start:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:3001
-- PostgreSQL: localhost:5432
+- Site : <http://localhost:3000>
+- Back-office : <http://localhost:3000/admin>
+- API : <http://localhost:3001/api/health>
 
-## 📚 Documentation
+`npm run seed` peut être relancé à tout moment pour revenir à l'état de démo.
 
-- [Architecture Guide](./docs/ARCHITECTURE.md)
-- [API Documentation](./docs/API.md)
-- [Database Schema](./docs/DATABASE.md)
-- [Security Guidelines](./docs/SECURITY.md)
-- [Deployment Guide](./docs/DEPLOYMENT.md)
+## Comptes de démo
 
-## ⚖️ Legal
+| Rôle | Email | Mot de passe |
+| --- | --- | --- |
+| Administrateur | admin@taltour.com | Admin2026! |
+| Client démo (réservations dans tous les états, avoir, fidélité) | client@taltour.com | Client2026! |
+| Autres clients (90 comptes `@example.com`) | voir la table `contacts` | Taltour2026! |
 
-- [Mentions Légales](./legal/mentions-legales.md) - French Legal Notice
-- [Privacy Policy](./legal/privacy-policy.md)
-- [Terms of Service](./legal/terms-of-service.md)
+Codes promo de démo : `BIENVENUE10`, `TALTOUR2026`, `FIDELE15` (actifs), `ETE2025`, `AID2026` (expirés), `PARTENAIRE20` (désactivé).
 
-## 🔒 Security
+## Données
 
-This project fixes all critical vulnerabilities from the original taltour.com:
-- ✅ Prepared statements (prevents SQL injection)
-- ✅ Input validation & authorization checks
-- ✅ Secure password hashing (bcrypt, not MD5)
-- ✅ Rate limiting
-- ✅ HTTPS enforced
-- ✅ CORS properly configured
-- ✅ Security headers
+Données réelles de taltour.com :
 
-See [SECURITY.md](./docs/SECURITY.md) for details.
+- 43 modèles Algérie et 9 modèles Maroc avec fiches techniques, photos, cautions et tarifs basse saison 1/7/14/30/90/180 jours ;
+- les 12 villes et Marrakech ;
+- les options, conditions de location, FAQ, pages, articles du blog ;
+- 671 avis clients.
 
-## 📊 Database
+Données d'exemple générées par le seed :
 
-Tables maintained from original Taltour:
-- `contacts` - User profiles
-- `commandes` - Reservations
-- `vehicules` - Car catalog
-- `admins` - Admin accounts
-- `payment_logs` - Payment history
-- `audit_log` - Admin activity (NEW)
+- environ 150 véhicules immatriculés répartis par ville ;
+- 90 clients et environ 440 réservations passées, en cours et à venir ;
+- paiements, avoirs, messages de contact, demandes de transfert.
 
-## 🎯 Roadmap
+Les noms d'agents et numéros d'agents par ville ainsi que l'IBAN sont des valeurs d'exemple, à remplacer dans le back-office (Villes & agences, Paramètres).
 
-- [ ] Phase 1: Frontend scaffolding
-- [ ] Phase 2: Backend API
-- [ ] Phase 3: Database setup
-- [ ] Phase 4: Admin dashboard
-- [ ] Phase 5: Payment integration
-- [ ] Phase 6: Testing & security audit
-- [ ] Phase 7: Production deployment
+## Règles de tarification (identiques à taltour.com)
 
-## 👥 Team
+- **Forfaits dégressifs** : le prix par jour du plus grand forfait atteint (1, 7, 14, 30, 90, 180 jours), 1 h de tolérance.
+- **Saisons** : coefficient par jour (haute saison +30 %, modifiable dans Saisons).
+- **Remise véhicule** : -10 % véhicule de 2 ans, -15 % de 3 ans.
+- **Frais** : aller simple 70 € quand la ville de retour est différente ; frais de rapatriement au km quand le véhicule est stationné dans une autre ville, avec le message « louez moi à … ».
+- **Options** : fixes, par jour ou en % de la location ; Assurance Gold sans caution, avec 30 € de réserve.
+- **Conducteur** : 25 ans ou plus de 5 ans de permis, 2 ans de permis minimum ; plus de 110 ch : 30 ans et 5 ans de permis. Moins de 5 ans de permis ou plus de 65 ans : caution doublée et Gold indisponible.
+- **Fidélité** : -10 % après une location terminée. Codes promo, avoirs utilisables au paiement.
+- **Annulation** : 20 % retenus à plus de 48 h, 30 % dans les 48 h, ou avoir intégral ; remboursement total avec l'assurance annulation.
+- **Paiement** : CB, PayPal, chèque, virement, ou en deux fois (acompte PayPal + solde en espèces). Le paiement en ligne est simulé en local.
 
-- **Founder**: Seyf Goumeida
-- **Original Taltour by**: Webnext.fr
+Tous les paramètres sont modifiables dans `/admin/parametres`.
 
-## 📄 License
+## Scripts
 
-MIT License - See LICENSE file for details
-
----
-
-**Status**: 🚧 In Development  
-**Version**: 0.1.0  
-**Last Updated**: 2026-10-08
+| Commande | Effet |
+| --- | --- |
+| `npm run dev` | API et site en mode développement |
+| `npm run seed` | recrée la base de démo |
+| `npm run type-check` | vérification TypeScript des deux paquets |
+| `npm run build` | build de production |

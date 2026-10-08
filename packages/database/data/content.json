@@ -1,0 +1,130 @@
+{
+  "sites": [
+    {
+      "code": "dz",
+      "nom": "Taltour",
+      "titre": "Louer une voiture en Algérie",
+      "slogan": "Choisissez Taltour, faites le tour !",
+      "telephones": ["+33 7 81 60 23 43", "+213 554 506 138", "+33 6 11 65 63 90"],
+      "hotline": "04 28 04 00 72"
+    },
+    {
+      "code": "ma",
+      "nom": "Ouziad Marrakech Cars",
+      "titre": "Louer une voiture au Maroc",
+      "slogan": "Choisissez Taltour, faites le tour !",
+      "telephones": ["+21 (2)5 24 34 46 47", "+21 (2)6 64 09 71 85"],
+      "hotline": "04 28 04 00 72"
+    }
+  ],
+  "villes": [
+    { "nom": "Alger", "lat": 36.6910, "lng": 3.2154, "aeroport": true, "point_rdv": "Entrée du parking TERMINAL OUEST / PARKING / P02 / 2 A du nouvel aéroport d'Alger" },
+    { "nom": "Oran", "lat": 35.6239, "lng": -0.6212, "aeroport": true, "point_rdv": "Parking de l'aéroport Ahmed Ben Bella" },
+    { "nom": "Bejaia", "lat": 36.7120, "lng": 5.0699, "aeroport": true, "point_rdv": "Parking de l'aéroport Abane Ramdane" },
+    { "nom": "Constantine", "lat": 36.2760, "lng": 6.6204, "aeroport": true, "point_rdv": "Parking de l'aéroport Mohamed Boudiaf" },
+    { "nom": "Setif", "lat": 36.1781, "lng": 5.3245, "aeroport": true, "point_rdv": "Parking de l'aéroport du 8 Mai 1945" },
+    { "nom": "Chlef", "lat": 36.1653, "lng": 1.3347, "aeroport": false, "point_rdv": "Livraison en ville" },
+    { "nom": "Jijel", "lat": 36.8204, "lng": 5.7667, "aeroport": false, "point_rdv": "Livraison en ville" },
+    { "nom": "Tlemcen", "lat": 35.0167, "lng": -1.4500, "aeroport": true, "point_rdv": "Parking de l'aéroport Messali El Hadj" },
+    { "nom": "Skikda", "lat": 36.8762, "lng": 6.9093, "aeroport": false, "point_rdv": "Livraison en ville" },
+    { "nom": "Biskra", "lat": 34.7930, "lng": 5.7382, "aeroport": false, "point_rdv": "Livraison en ville" },
+    { "nom": "Batna", "lat": 35.5559, "lng": 6.1741, "aeroport": false, "point_rdv": "Livraison en ville" },
+    { "nom": "Annaba", "lat": 36.8222, "lng": 7.8092, "aeroport": false, "point_rdv": "Livraison en ville" },
+    { "nom": "Marrakech", "lat": 31.6069, "lng": -8.0363, "aeroport": true, "site": "ma", "point_rdv": "Parking de l'aéroport Marrakech Ménara" }
+  ],
+  "options": [
+    { "code": "multiconducteur", "libelle": "Contrat multiconducteurs", "type_prix": "fixe", "prix": 20, "actif": true, "description": "Pour 20 euro , une autre personne peut prendre le volant et conduire le véhicule loué à votre nom" },
+    { "code": "km_illimite", "libelle": "Kilométrage illimité", "type_prix": "pourcentage", "prix": 25, "actif": true, "description": "Vous avez des trajets à faire , roulez sans compter prendez l'option km illimité à 25% de plus que le tarif initial et roulez sans limite. Le km autorisé sans cette option est de 250 km / jour" },
+    { "code": "chauffeur", "libelle": "Véhicule avec chauffeur", "type_prix": "par_jour", "prix": 45, "actif": true, "description": "L'option avec chauffeur est proposée au tarif de 45 euros par jour. Les prestations sont assurées de 9h00 à 17h00 toute demande en dehors de cette plage horaire fera l'objet d'un supplément" },
+    { "code": "siege_bebe", "libelle": "Siège bébé ( 3-13kg)", "type_prix": "par_jour", "prix": 3, "actif": true, "description": "Vous avez des enfants ? pensez à louer le siège bébé/enfant ou le réhausseur à seulement 3 euro / jour" },
+    { "code": "rehausseur", "libelle": "Réhausseur ( 15-36kg)", "type_prix": "par_jour", "prix": 2, "actif": true, "description": "Réhausseur pour enfant de 15 à 36 kg" },
+    { "code": "livraison_domicile", "libelle": "livraison a domicile", "type_prix": "fixe", "prix": 40, "actif": true, "description": "Vous souhaitez une livraison ailleur que l'aéroport c'est possible à seulement 40 euro (pour une adresse au alentour de 50 km du siège dar el beida) , pour une autre adresse nous contacter par téléphone pour un devis exacte et un agent TALTOUR vous ramènera le véhicule à l'adresse souhaité !" },
+    { "code": "assurance_annulation", "libelle": "assurance annulation", "type_prix": "pourcentage", "prix": 8, "actif": true, "description": "Vous souhaitez annuler votre réservation et récupérer le montant la totalité du montant payé , prenez l'assurance annulation, vous serez remboursé dans les 24h qui suiveront votre demande ." },
+    { "code": "gold", "libelle": "Assurance Gold tous risques (sans caution, sans franchise) . 30€ retenu en cas de restitution véhicule sale&sans carburant sauf vip", "libelle_court": "Assurance Gold tous risques", "type_prix": "pourcentage", "prix": 30, "actif": true, "description": "Vous n'avez pas de chéquier pour le chèque de caution , aucun problème prenez l'assurance gold qui vous permet de ne pas laisser de caution , ni passeport , juste 30 euro de reserve pour le carburant et le lavage qui vous seront remis à la fin de votre location . En cas de sinistre responsable ou pas, l'option gold vous couvre tout , aussi le vol et l'incendie payez 30% de plus et soyez tranquils pendant vos vacances." },
+    { "code": "vip", "libelle": "VIP(pas de lavage ni plein de carburant à la restitution)", "libelle_court": "Client VIP", "type_prix": "fixe", "prix": 25, "actif": true, "description": "L'option Vip , vous permet de gagner du temps et profiter pleinement de votre séjour , un agent vous attendra à l'intérieur de l'aéroport , avec une pancarte Taltour à votre nom , aussi vous aidera à porter vos bagages , le véhicule est livré propre avec le plein , à la restitution pas la peine de vous soucier de le rendre dans cet état , le plein et le lavage vous sont offert aucune pénalité ne sera appliqué à votre égard ." },
+    { "code": "siege_enfant", "libelle": "Siège enfant ( 9 - 36kg)", "type_prix": "par_jour", "prix": 3, "actif": true, "description": "Siège enfant de 9 à 36 kg" },
+    { "code": "wifi", "libelle": "WIFI à bord", "type_prix": "fixe", "prix": 30, "actif": false, "description": "A Seulement 30 euro ,profitez d'internet pendant tout votre séjour ,un petit modem 4G/3G vous sera remis par notre agent ,forfait 15Giga inclus valable sur toute la période de votre location." },
+    { "code": "sortie_pays", "libelle": "Sortie du pays", "type_prix": "fixe", "prix": 40, "actif": false, "description": "Vous souhaitez partir en Tunisie c'est possible , prenez l'option sortie du pays à seulement 40 euro , il suffit juste d'envoyer une copie de votre permis de conduire à fin de vous préparer la procuration de sortie." },
+    { "code": "mini_compresseur", "libelle": "Mini compresseur", "type_prix": "par_jour", "prix": 1, "actif": false, "description": "La réparation de pneu en cas de creveson est à la charge du client , pensez à prendre le mini compresseur comme option lors de votre réservation c'est à 1 euro / jour ." }
+  ],
+  "faq": [
+    { "q": "Qu'est ce que l'Assurance Gold ?", "r": "L'assurance gold c'est une assurance tout risque, qui couvre aussi le vol ou l'incendie, qui vous permet de louer un véhicule sans caution ni passeport, juste 30 euro pour le lavage et le carburant qui vous seront remis à la restitution lorsque la voiture est rendu propre et avec le plein !!" },
+    { "q": "Comment reconnaître l'agent livreur ?", "r": "l'agent sera à l'entrée du parking TERMINAL OUEST / PARKING / P02 / 2 A pour le nouvel aéroport d'Alger\nLes agents taltour sont habillés en chemise jaune, pantalon et veste bleu, avec le logo Taltour brodé sur les vêtements\nun panneau Taltour est posé sur le toit de la voiture , et le numéro de l'agent se trouve sur votre contrat." },
+    { "q": "Comment changer de modèle ?", "r": "Si vous souhaitez changer de modèle , vous pouvez le faire via votre compte client , ou contactez nous par tel ou par mail ." },
+    { "q": "Qu'est ce que l'option VIP?", "r": "En prenant cette option , notre agent vous attendra à l'interieur de l'aéroport , à la sortie des passagers , avec une pancarte à votre nom , vous aidera à porter vos valises , vous avez le droit de rendre le véhicule sale et sans carburant , rien ne vous sera factué c'est une option à 40 euro." },
+    { "q": "Pouvez vous nous livrer à un autre entre endroit que l'aéroport ?", "r": "Oui il suffit de prendre l'option livraison à domicile ça vous coutera 40 euro ." },
+    { "q": "Que faire en cas de panne ?", "r": "Contactez le +213 554 506 139 , éxpliquez la panne, la personne vous orientera , un véhicule de remplacement vous sera remis dans les plus brefs délai selon la distance de l'endroit ou vous vous trouvez , si le modèle proposé est inferieur au modèle loué , la différence restera comme avoir sur votre compte client .\nLa réparation de pneu en cas de creveson est à la charge du client , pensez à prendre le mini compresseur comme option lors de votre réservation c'est à 1 euro / jour ." },
+    { "q": "En cas d'annulation serais je remboursé ?", "r": "Oui bien sur , nous retirons 20 % de la somme totale de votre location si l'annulation est faite entre 48h et plus et 30 % si l'annulation est faites dans les 48h de votre éventuel arrivé , si vous voulez gardez un avoir c'est possible pour l'intégralité de la somme payée, en cas de souscription d'assurance annulation le remboursement sera sans retenue." },
+    { "q": "A combien de killomètres ai je droit ?", "r": "250 KM / JOUR et en illimité en prenant l'option km illimité" },
+    { "q": "Quel documents remettre à la prise du véhicule ?", "r": "Votre contrat téléchargé via votre compte client imprimé en double examplaires , une copie de votre permis de conduire , un chèque de caution si vous n'avez pas l'assurance gold ." },
+    { "q": "Les véhicules , sont il équipés de gps ?", "r": "Non , utilisez google maps , pour l'internet prenez l'option wifi, vous aurez un petit modem avec vous , une option qui vous coutera 30 euro ," }
+  ],
+  "pages": [
+    {
+      "slug": "conditions-de-location",
+      "titre": "Conditions de location",
+      "contenu": "Conditions Générales de Location TALTOUR\n\nLes présentes conditions générales définissent les droits et obligations du loueur et du client dans le cadre de la location d'un véhicule auprès de TALTOUR.\n\n## 1. Conditions du conducteur\n- Le conducteur doit être âgé d'au moins 25 ans ou être titulaire du permis de conduire depuis plus de 5 ans.\n- Un minimum de 2 ans de permis est obligatoire.\n- Pour les conducteurs de moins de 25 ans ou ayant moins de 5 ans de permis, une caution majorée pourra être demandée.\n- Les véhicules dépassant 110 chevaux ne peuvent être loués qu'aux conducteurs âgés de plus de 30 ans et titulaires du permis depuis plus de 5 ans, sauf accord écrit du loueur.\n\n## 2. Documents obligatoires\n- Le client doit fournir une copie du permis de conduire ainsi que le contrat signé en deux exemplaires.\n- Une caution ou la souscription à l'assurance Gold peut être exigée selon le type de réservation.\n\n## 3. Livraison et restitution du véhicule\n- Les livraisons sont assurées dans les principaux aéroports et villes d'Algérie.\n- La livraison à domicile est facturée selon la distance.\n- Le véhicule est livré propre avec le plein de carburant et doit être restitué dans le même état.\n- Une heure de tolérance est accordée pour les retards à la livraison ou à la restitution.\n- Tout retard non signalé pourra entraîner des frais supplémentaires.\n\n## 4. Utilisation du véhicule\n- Le véhicule doit être utilisé uniquement sur le territoire algérien, sauf autorisation écrite du loueur.\n- Le client est responsable des infractions routières commises pendant la période de location.\n- Toute sous-location ou utilisation non autorisée du véhicule est interdite.\n\n## 5. Kilométrage\n- Le forfait comprend 250 km par jour.\n- Les kilomètres supplémentaires seront facturés selon la catégorie du véhicule.\n- Une option kilométrage illimité peut être proposée lors de la réservation.\n\n## 6. Assurance et caution\n- Une caution de 1000 € à 3000 € peut être exigée selon la catégorie du véhicule.\n- L'assurance Gold permet au client de louer sans laisser de caution, sous réserve des conditions prévues.\n- L'assurance Gold ne couvre pas : la conduite sous alcool ou stupéfiants, la perte des clés ou papiers, les erreurs de carburant, ni les dommages résultant d'une négligence grave.\n- En cas de sinistre, le client doit obligatoirement informer immédiatement la direction et fournir un constat si nécessaire.\n\n## 7. Accidents, pannes et dommages\n- Tout dommage causé au véhicule reste à la charge du client dans la limite prévue au contrat.\n- Les crevaisons, pertes d'enjoliveurs, brûlures de sièges ou détériorations intérieures sont facturées au client.\n- En cas de panne liée à une mauvaise utilisation du véhicule, les frais de dépannage et de réparation seront à la charge du client.\n- En cas de panne non imputable au client, un véhicule de remplacement pourra être proposé selon les disponibilités.\n\n## 8. Annulation et remboursement\n- Toute annulation effectuée plus de 48 heures avant la livraison entraîne des frais de gestion.\n- Toute annulation moins de 48 heures avant la livraison pourra entraîner une retenue plus importante.\n- Les remboursements sont effectués uniquement par les services administratifs habilités.\n- Les montants inférieurs ou égaux à 50 € pourront être transformés en avoir.\n\n## 9. Restitution anticipée\n- Aucun remboursement ne sera effectué en cas de restitution du véhicule avant la fin prévue du contrat.\n- Un avoir pourra être accordé selon les conditions commerciales en vigueur.\n\n## 10. Responsabilité\n- L'entreprise décline toute responsabilité concernant les objets oubliés dans le véhicule.\n- Le client reconnaît avoir pris connaissance des présentes conditions générales et les accepter sans réserve.\n\n## 11. L'OPTION AVEC CHAUFFEUR\nL'option avec chauffeur est proposée au tarif de 45 euros par jour. Les prestations sont assurées de 9h00 à 17h00 toute demande en dehors de cette plage horaire fera l'objet d'un supplément\n\nTALTOUR se réserve le droit de modifier les présentes conditions"
+    },
+    {
+      "slug": "simple-comme-taltour",
+      "titre": "Louer une voiture dans toute l'Algerie",
+      "contenu": "## CHOISISSEZ TALTOUR , FAITES LE TOUR !\nBienvenue en Algérie , faites le tour de notre beau pays en toute sécurité avec Taltour , en effet notre entreprise vous présente ses services dans le téritoire national , livraison garantie dans tous les aéroports , aussi aux ports , prenez la voiture à l'est et remettez la à l'ouest séjournez en toute confiance , profitez avec votre famille en toute tranquilité\n\nBientot le Sud , Le Maroc et la Tunisie , besoin de nouveauté ? Besoin de Taltour , faites le bon choix et roulez sans limites\n\n## Service de qualité depuis 2003\nImplanté sur tout le territoire nationnal depuis 2003, le groupe Taltour est l'un des pionniers de la location de voitures en Algérie .\n\nle secret de sa longévité : un service client irréprochable ! une équipe professionnelle à votre écoute 7jours/7 et 24h/24\n\nbientot sur le Maroc et la tunisie , vous pouriez payer en Algerie et avoir une voiture à votre arrivée livrée sur les aéroports du Maroc et de la Tunisie pour des vacances plus simples !\n\n## Devis gratuit et immédiat\nDepuis notre site www. taltour.com , indiquez vos dates et lieux de location. Vous obtenez sans délai nos disponibilités et nos tarifs par modèle de véhicule.\n\nTaltour est présent dans les principaux aéroports d'Algérie, via son réseau d'agences et d'agents exclusifs. Vous pouvez donc louer votre voiture à Alger, Oran, Annaba, Constantine, Bejaia, Batna, Setif, Tlemcen, Skikda, Biskra, Chlef, Jijel , etc.\n\n## Véhicules neufs \"à la carte\"\nAvec plus de 30 modèles différents, de la petite citadine économique au véhicule de prestige, en passant par le 4x4 tout-terrain et le véhicule utilitaire, le parc automobile Taltour est le plus complet des agences de location en Algérie .\n\nMais le service ne serait pas 100% satisfaisant sans la possibilité de personnaliser votre location. Tout un éventail d'options est disponible : équipements intérieurs, sièges bébés, assurance dommage collision, pass Maghreb, contrat multiconducteurs, etc. De plus vous pouvez si vous le souhaitez demander un chauffeur pour votre véhicule. Toutes nos voitures sont climatisées .\n\nEnfin, pour allier confort et sécurité, tous nos véhicules sont neufs ou dans un état proche du neuf . Nous disposons en outre de notre propre réseau de techniciens qui suit votre véhicule kilomètre après kilomètre.\n\n## Paiement sécurisé en ligne\nTaltour vous simplifie la vie : réservez et payez votre véhicule en ligne, en moins de 5 minutes !\n\nDès que vous validez votre réservation, une confirmation vous est envoyée par email et vous pouvez choisir entre un règlement par chèque, Paypal ou carte bancaire .\n\nNotre système de paiement en ligne est à la fois simple à utiliser et hautement sécurisé (chiffrement TLS / HTTPS ). En quelques secondes, votre réservation est validée et vous recevez votre contrat de location en PDF . Nous garantissons en outre la confidentialité absolue de vos données personnelles.\n\nUn chèque de caution est requis mais ne sera pas débité, sauf infraction grave aux conditions de location.\n\n## Votre voiture vous attend à l'aéroport\nDans tous les aéroports, Taltour est représenté par des agents exclusifs. Vous les trouverez soit dans nos agences soit directement à votre descente de l'avion.\n\nPensez à vous munir de votre permis de conduire et de votre contrat de location . Notre agent vous présentera votre voiture et répondra à toutes vos questions.\n\nNous nous efforçons de réduire les formalités au strict minimum : en quelques minutes vous serez au volant !\n\nune fois que vous avez récupéré vos bagages , direction le parking notre agent vous attend vétu d'une chemise jaune Taltour , costume bleu marine\n\nL'équipe Taltour vous souhaite un bon séjour en Algérie :)"
+    },
+    {
+      "slug": "mentions-legales",
+      "titre": "Mentions légales",
+      "contenu": "## Éditeur\nLe site taltour.com est édité par :\n\nWebnext.fr\n7 Avenue Joseph Giordan, 06200 Nice\nSite web : https://webnext.fr/\nRCS : 508 039 377 RCS NICE\nReprésentant légal : Mathieu Perino\n\nLe directeur de la publication est Mohand Taroudjit.\n\n## Hébergeur\nLe site taltour.com est hébergé par :\n\n1&1 Internet SARL\n7, place de la Gare BP 70109\n57201 Sarreguemines Cedex\nSIRET (siege) 43130377500016"
+    },
+    {
+      "slug": "transfert-aeroport",
+      "titre": "Transfert Aéroport",
+      "contenu": "Notre service de transfert est mis à votre disposition de l'Aéroport vers votre Hôtel ou autre lieux de destination. Nos chauffeurs sont disponibles 24h/7j au rendez-vous pour vous transporter à votre destination.\n\nAéroports desservis : Alger, Oran, Constantine, Bejaia, Sétif, Tlemcen\n\n- Paiement en ligne ou a votre arrivée\n- Prix tout inclus (péage, carburant, chauffeur…)"
+    }
+  ],
+  "articles": [
+    { "titre": "Client VIP", "date": "2019-10-13", "auteur": "Hafsa", "contenu": "DEVENEZ TOUS VIP CHEZ TALTOUR\n\nL'option Vip , vous permet de gagner du temps et profiter pleinement de votre séjour , un agent vous attendra à l'intérieur de l'aéroport , avec une pancarte Taltour à votre nom , aussi vous aidera à porter vos bagages , le véhicule est livré propre avec le plein , à la restitution pas la peinde de vous soucier de le rendre dans cet état , le plein et le lavage vous sont offert aucune pénalité ne sera appliqué à votre égard .\n\nPrenez l'option VIP et soyez tranquile !" },
+    { "titre": "Wifi à bord", "date": "2019-10-13", "auteur": null, "contenu": "Être connecté est devenu essentiel dans notre quotidien, que ce soit lire ses emails, mettre à jour son profil sur les réseaux sociaux ou utiliser ses applications.\n\nAvec TAL , bénéficier d'un accès boitier 3G/4G à bord de votre voiture pour connecter smartphone ou autre appareils, en souscrivant à l'option wifi mobile au prix de 35 euros * sur votre réservation. Profitez de vos trajets connectés en Algérie.\n\n* le tarif de l'option est fixe\n*validité du forfait 15Giga inclus sur toute la période de votre location ." },
+    { "titre": "DU TOURISME AVEC TALTOUR", "date": "2019-06-11", "auteur": "Hafsa", "contenu": "Taltour vous propose des circuits dans toute l'algérie pour vos vacances d'été , dihiver ou de printemps ,\n\nL'est , l'ouest , le sud Algérien , et la capitale vous attendent pour des vacances inoubliables .\n\ndes circuits adaptés à votre demande , chauffeurs , guides de chaque région seront à votre disposition n'hésitez pas à nous contactez pour un séjour sur mesure ." },
+    { "titre": "Nouveaux modèles", "date": "2019-05-28", "auteur": "Hafsa", "contenu": "Nouveaux modèles chez Taltour du VOLKSWAGEN pour l'été 2019 !!\n\nRoulez en toute sérénité" },
+    { "titre": "TALTOUR AU MAROC", "date": "2019-01-23", "auteur": "Hafsa", "contenu": "Taltour au Maroc !\n\nTaltour vous ouvre ses portes au maroc , louez sur notre site , et votre voiture vous attendra à l'aéroport de Marrakech ou Casablanca , louez via notre site et profitez pleinement de vos vacances , Taltour toujours là pour vous satisfaire !!" },
+    { "titre": "À LA DÉCOUVERTE DU SUD ALGÉRIEN AVEC TALTOUR", "date": "2018-11-15", "auteur": "Hafsa", "contenu": "Découvrez l'un des plus beaux déserts du monde, LE SAHARA ALGÉRIEN. Bientôt Taltour vous accueillera à Ghardaia, Tamanrasset, Adrar, Hassi messaoud, venez découvrir notre sud Algérien , séjour d'affaire ou de détente, Taltour vous accompagnera pour le bon déroulement de votre voyage. Pick up 4x4 double cabine disponibles, choisissez la meilleure voiture chez Taltour, pour le meilleur des séjours !" },
+    { "titre": "Louez du neuf", "date": "2018-11-14", "auteur": "Hafsa", "contenu": "Une Gamme de véhicules neufs chaque année ▪ roulez en toute sécurité ▪ louez chez Taltour ▪ louez du neuf\n\n5, 7 ou 8 places, n'ayez plus peur de voyager en famille la solution est chez Taltour !" },
+    { "titre": "Visites Guidées", "date": "2018-11-07", "auteur": "Hafsa", "contenu": "Besoin de Guide , choisissez Taltour , nous vous proposons des locations de véhicules avec ou sans chauffeurs , un guide de la région pour une visite inoubliable , de l'est à l'ouest de l'Algerie , notre équipe vous assure une qualité de service irréprochable ,\n\nNous disposons de Guides sur Toute l'Algérie , n'hésitez plus profitez , visitez notre beau pays , séjournez à Oran , et faites un tour au FORT DE SANTA CRUZ l'un des plus beaux lieux historiques de l'Algerie , un coin touristique qui vous émerveillera , vous pouvez également vous rendre à la VIEILLE VILLE TURQUE pour une belle balade et visiter la MOSQUE DE HASSAN PACHA,et surtout nager dans les meilleures plages de la mer méditerranée du coté des ANDALOUSES pour une parenthèse de détente et une vue unique!!" },
+    { "titre": "Visitez l'est algérien", "date": "2018-11-07", "auteur": "Hafsa", "contenu": "Envie de visiter l'est de notre pays !! contactez Taltour , Nos Guides seront à votre disposition pour les endroits les plus féeriques de la région , Constantine une ville sublime , avec ses fabuleux ponts , comme LE PONT SIDI M'CID que l'on considère comme la carte d'identité de Constantine , il vous offre une vue sans limites , ou aussi les merveilleuses RUINES ROMAINES DE TIDDIS , sans oublier de visiter les multiples mosquées de la région comme celle de SOUK EL GHEZAL , et celle de l' EMIR ABDELKADER\n\nJamais déçu avec TALTOUR , Profitez ! Visitez l'Algérie" },
+    { "titre": "Bejaia, la perle de la Kabylie", "date": "2018-11-08", "auteur": "Hafsa", "contenu": "L'une des plus belles villes d'Algérie , Bejaia , un patrimoine naturel exceptionnel , de YEMMA GOURAYA à la CORNICHE , ou encore le PIC DES SINGES des paysages qui vous permettrons de passer des vacances inoubliables , en hiver ou en été , la perle de la Kabylie vous attend , notre guide est là pour vous accompagner à découvrir cette ville éblouissante , vous avez aussi le choix d'une balade dans la CASBAH a fin de découvrir l'histoire de notre beau pays , ou bien une baignade exceptionnelle l'été dans des plages de rêve , vous ne serez pas déçus profitez pleinement de vos vacances , découvrez notre pays !! Contactez Taltour, gardez le sourire" }
+  ],
+  "parametres": {
+    "entreprise": {
+      "nom": "Taltour",
+      "depuis": 2003,
+      "hotline_contact": ["0033 7 81602343", "00213 560 795 696"],
+      "panne": "+213 554 506 139",
+      "adresse_cheque": ["Taltour", "114 Rue de la République", "42500 Le Chambon-Feugerolles", "France"],
+      "banque": { "titulaire": "Taltour (exemple)", "iban": "FR76 0000 0000 0000 0000 0000 000", "bic": "XXXXXXXX" },
+      "facebook": "https://www.facebook.com/Taltour-306582313400227/",
+      "instagram": "https://www.instagram.com/Taltour/",
+      "youtube": "https://www.youtube.com/watch?v=D5pidl8FTUM"
+    },
+    "tarification": {
+      "forfaits": [1, 7, 14, 30, 90, 180],
+      "frais_aller_simple": 70,
+      "tarif_rapatriement_km": 0.18,
+      "km_inclus_jour": 250,
+      "remise_fidelite_pct": 10,
+      "remise_age": { "2": 10, "3": 15 },
+      "reserve_gold": 30,
+      "tolerance_heures": 1,
+      "annulation_plus_48h_pct": 20,
+      "annulation_moins_48h_pct": 30,
+      "acompte_deux_fois_pct": 30
+    },
+    "conducteur": {
+      "age_min": 25,
+      "permis_min_ans": 2,
+      "permis_experimente_ans": 5,
+      "puissance_seuil_ch": 110,
+      "age_min_puissant": 30,
+      "age_max_gold": 65
+    }
+  }
+}

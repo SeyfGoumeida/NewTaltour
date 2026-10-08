@@ -1,87 +1,38 @@
-import axios, { AxiosInstance } from 'axios';
+'use client';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+export const TOKEN_KEY = 'taltour_token';
 
-// Create axios instance
-const api: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// Add token to requests
-api.interceptors.request.use((config) => {
-  if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+export class ApiError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
   }
-  return config;
-});
+}
 
-// Handle errors
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('token');
-        window.location.href = '/login';
-      }
-    }
-    return Promise.reject(error);
+export function getSiteCookie(): 'dz' | 'ma' {
+  if (typeof document === 'undefined') return 'dz';
+  return /(?:^|; )site=ma(?:;|$)/.test(document.cookie) ? 'ma' : 'dz';
+}
+
+function token() {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
   }
-);
+}
 
-// Auth endpoints
-export const authAPI = {
-  register: (email: string, password: string, nom: string, prenom: string) =>
-    api.post('/auth/register', { email, password, nom, prenom }),
-  login: (email: string, password: string) =>
-    api.post('/auth/login', { email, password }),
-  logout: () => api.post('/auth/logout'),
-  me: () => api.get('/auth/me'),
-};
+export async function api<T = any>(path: string, init: { method?: string; body?: unknown; query?: Record<string, unknown> } = {}): Promise<T> {
+  const url = new URL(BASE + path);
+  if (init.query) for (const [k, v] of Object.entries(init.query)) if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, String(v));
+  const headers: Record<string, string> = { 'x-site': getSiteCookie() };
+  if (init.body !== undefined) headers['content-type'] = 'application/json';
+  const t = token();
+  if (t) headers.authorization = `Bearer ${t}`;
+  const res = await fetch(url, { method: init.method || (init.body !== undefined ? 'POST' : 'GET'), headers, body: init.body !== undefined ? JSON.stringify(init.body) : undefined });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new ApiError(res.status, data.error || `Erreur ${res.status}`);
+  return data as T;
+}
 
-// Vehicle endpoints
-export const vehicleAPI = {
-  list: (filters?: any) => api.get('/vehicles', { params: filters }),
-  get: (id: number) => api.get(`/vehicles/${id}`),
-  search: (filters: any) => api.get('/vehicles/search', { params: filters }),
-};
-
-// Reservation endpoints
-export const reservationAPI = {
-  list: () => api.get('/reservations'),
-  get: (id: number) => api.get(`/reservations/${id}`),
-  create: (data: any) => api.post('/reservations', data),
-  update: (id: number, data: any) => api.put(`/reservations/${id}`, data),
-  cancel: (id: number) => api.post(`/reservations/${id}/cancel`),
-};
-
-// Payment endpoints
-export const paymentAPI = {
-  process: (reservationId: number, method: string) =>
-    api.post('/payments', { reservationId, method }),
-  verify: (paymentId: string) => api.get(`/payments/${paymentId}/verify`),
-};
-
-// User endpoints
-export const userAPI = {
-  profile: () => api.get('/users/profile'),
-  updateProfile: (data: any) => api.put('/users/profile', data),
-  changePassword: (oldPassword: string, newPassword: string) =>
-    api.post('/users/change-password', { oldPassword, newPassword }),
-};
-
-// Admin endpoints
-export const adminAPI = {
-  dashboard: () => api.get('/admin/dashboard'),
-  users: () => api.get('/admin/users'),
-  reservations: () => api.get('/admin/reservations'),
-  vehicles: () => api.get('/admin/vehicles'),
-};
-
-export default api;
+export const fetcher = (path: string) => api(path);
