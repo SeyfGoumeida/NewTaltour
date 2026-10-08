@@ -9,14 +9,15 @@ import type { User } from '@/lib/types';
 import { useAuth, useSite } from '@/components/providers';
 import { Alert, Button, Field, Input } from '@/components/ui';
 import { safeRedirect } from './lib';
+import { useHoneypot } from '@/components/Honeypot';
 
-type Session = { token: string; user: User };
+type Session = { user: User };
 
 function useAfterLogin() {
   const router = useRouter();
   const { setSession } = useAuth();
   return (s: Session) => {
-    setSession(s.token, s.user);
+    setSession(s.user);
     const to = safeRedirect(typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('redirect') : null);
     if (to) router.push(to);
   };
@@ -78,6 +79,7 @@ function RegisterForm() {
   const after = useAfterLogin();
   const site = useSite();
   const [f, setF] = useState(EMPTY);
+  const hp = useHoneypot();
   const [more, setMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -88,7 +90,7 @@ function RegisterForm() {
     setBusy(true);
     setError(null);
     try {
-      after(await api<Session>('/auth/register', { body: f }));
+      after(await api<Session>('/auth/register', { body: { ...f, website: hp.value() } }));
     } catch (err) {
       setError((err as Error).message);
       setBusy(false);
@@ -96,7 +98,8 @@ function RegisterForm() {
   };
 
   return (
-    <form onSubmit={submit} className="glass flex flex-col p-6 sm:p-8">
+    <form onSubmit={submit} className="glass relative flex flex-col p-6 sm:p-8">
+      {hp.field}
       <div className="flex items-center gap-3">
         <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent"><UserPlus className="h-5 w-5" /></span>
         <div>

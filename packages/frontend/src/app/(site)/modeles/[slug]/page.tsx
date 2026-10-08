@@ -8,8 +8,8 @@ import { getSite, sapi } from '@/lib/server';
 import { euro } from '@/lib/format';
 import type { Modele } from '@/lib/types';
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const m = await sapi<Modele>(`/modeles/${params.slug}`).catch(() => null);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const m = await sapi<Modele>(`/modeles/${(await params).slug}`).catch(() => null);
   return { title: m ? `Location ${m.nom_affiche}` : 'Modèle' };
 }
 
@@ -22,8 +22,9 @@ function Value({ v }: { v: string | boolean | null }) {
   return <span className="text-right text-white">{v}</span>;
 }
 
-export default async function ModelePage({ params, searchParams }: { params: { slug: string }; searchParams: Record<string, string | undefined> }) {
-  const [modele, site, all] = await Promise.all([sapi<Modele>(`/modeles/${params.slug}`, { notFoundOn404: true }), getSite(), sapi<Modele[]>('/modeles')]);
+export default async function ModelePage(props: { params: Promise<{ slug: string }>; searchParams: Promise<Record<string, string | undefined>> }) {
+  const [{ slug }, searchParams] = await Promise.all([props.params, props.searchParams]);
+  const [modele, site, all] = await Promise.all([sapi<Modele>(`/modeles/${slug}`, { notFoundOn404: true }), getSite(), sapi<Modele[]>('/modeles')]);
   const cat = categoryLabel(modele);
   const t1 = modele.tarifs.find((t) => t.jours === 1);
   const prix1 = (x: Modele) => x.tarifs.find((t) => t.jours === 1)?.prix ?? 0;

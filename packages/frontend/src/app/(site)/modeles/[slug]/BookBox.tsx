@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useSite } from '@/components/providers';
-import { Button, Field, Input, Select } from '@/components/ui';
+import DateTimePicker from '@/components/DateTimePicker';
+import { Button, Field, Select } from '@/components/ui';
 import { defaultDates } from '@/lib/format';
 
 export default function BookBox({ modeleId, initial }: { modeleId: number; slug: string; initial: Record<string, string | undefined> }) {
@@ -17,6 +18,8 @@ export default function BookBox({ modeleId, initial }: { modeleId: number; slug:
   const [dd, setDd] = useState(initial.date_depart || d.date_depart);
   const [dr, setDr] = useState(initial.date_retour || d.date_retour);
   const [error, setError] = useState<string | null>(null);
+  const today = new Date().toISOString().slice(0, 10);
+  const max = `${new Date().getUTCFullYear() + 2}-12-31`;
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,8 +44,15 @@ export default function BookBox({ modeleId, initial }: { modeleId: number; slug:
           </Select>
         </Field>
       </div>
-      <Field label="Date de départ"><Input type="datetime-local" step={1800} value={dd} onChange={(e) => setDd(e.target.value)} required /></Field>
-      <Field label="Date de retour"><Input type="datetime-local" step={1800} value={dr} onChange={(e) => setDr(e.target.value)} required /></Field>
+      <div>
+        <span className="label">Date de départ</span>
+        <DateTimePicker variant="dark" label="Date de départ" value={dd} min={today} max={max} rangeStart={dd} rangeEnd={dr}
+          onChange={(v) => { setDd(v); if (v >= dr) setDr(new Date(new Date(`${v}:00Z`).getTime() + 7 * 86_400_000).toISOString().slice(0, 16)); }} />
+      </div>
+      <div>
+        <span className="label">Date de retour</span>
+        <DateTimePicker variant="dark" label="Date de retour" value={dr} min={dd.slice(0, 10)} max={max} rangeStart={dd} rangeEnd={dr} onChange={setDr} />
+      </div>
       {error && <p className="text-sm text-danger">{error}</p>}
       <Button type="submit" size="lg" full>Réserver <ArrowRight className="h-4 w-4" /></Button>
     </form>

@@ -4,7 +4,8 @@ import crypto from 'crypto';
 import { z } from 'zod';
 import { q, one } from '../db';
 import { HttpError, parse, wrap } from '../lib/http';
-import { requireAuth, signToken } from '../lib/auth';
+import { endSession, optionalAuth, requireAuth, startSession } from '../lib/auth';
+import { config } from '../config';
 
 const r = Router();
 
@@ -27,28 +28,48 @@ export const profileSchema = z.object({
   date_naissance: optDate,
 });
 
+export const passwordSchema = z.string().min(8, '8 caractères minimum').max(72, '72 caractères maximum');
+export const hashPassword = (p: string) => bcrypt.hash(p, 12);
+export const sha256 = (s: string) => crypto.createHash('sha256').update(s).digest('hex');
+const DUMMY_HASH = bcrypt.hashSync('timing-equalizer', 12);
+
 const registerSchema = profileSchema.extend({
   email: z.email('Email invalide'),
-  password: z.string().min(8, '8 caractères minimum'),
+  password: passwordSchema,
+  website: z.string().optional(),
 });
 
 r.post('/register', wrap(async (req, res) => {
   const p = parse(registerSchema, req.body);
+  if (p.website) return res.status(201).json({ user: null });
   const email = p.email.toLowerCase();
   if (await one('SELECT 1 FROM contacts WHERE email = $1', [email])) throw new HttpError(409, 'Un compte existe déjà avec cet email');
-  const hash = await bcrypt.hash(p.password, 12);
+  const hash = await hashPassword(p.password);
   const user = await one(`INSERT INTO contacts (email, nom, prenom, tel, societe, adresse, code_postal, commune, pays, num_permis, date_permis, date_naissance, password_hash)
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING ${PROFILE_COLUMNS}`,
     [email, p.nom, p.prenom, p.tel, p.societe, p.adresse, p.code_postal, p.commune, p.pays, p.num_permis, p.date_permis, p.date_naissance, hash]);
-  res.status(201).json({ token: signToken(user), user });
+  startSession(res, user);
+  res.status(201).json({ user });
 }));
 
 r.post('/login', wrap(async (req, res) => {
-  const p = parse(z.object({ email: z.email('Email invalide'), password: z.string().min(1) }), req.body);
+  const p = parse(z.object({ email: z.email('Email invalide'), password: z.string().min(1).max(200) }), req.body);
   const row = await one(`SELECT ${PROFILE_COLUMNS}, password_hash FROM contacts WHERE email = $1`, [p.email.toLowerCase()]);
-  if (!row?.password_hash || !(await bcrypt.compare(p.password, row.password_hash))) throw new HttpError(401, 'Email ou mot de passe incorrect');
+  const ok = await bcrypt.compare(p.password, row?.password_hash || DUMMY_HASH);
+  if (!row?.password_hash || !ok) throw new HttpError(401, 'Email ou mot de passe incorrect');
   const { password_hash: _ph, ...user } = row;
-  res.json({ token: signToken(user), user });
+  startSession(res, user);
+  res.json({ user });
+}));
+
+r.post('/logout', (_req, res) => {
+  endSession(res);
+  res.json({ ok: true });
+});
+
+r.get('/session', optionalAuth, wrap(async (req, res) => {
+  const user = req.user ? await one(`SELECT ${PROFILE_COLUMNS} FROM contacts WHERE id = $1`, [req.user.id]) : null;
+  res.json({ user: user ?? null });
 }));
 
 r.get('/me', requireAuth, wrap(async (req, res) => {
@@ -66,10 +87,12 @@ r.put('/me', requireAuth, wrap(async (req, res) => {
 }));
 
 r.post('/password', requireAuth, wrap(async (req, res) => {
-  const p = parse(z.object({ ancien: z.string().min(1), nouveau: z.string().min(8, '8 caractères minimum') }), req.body);
+  const p = parse(z.object({ ancien: z.string().min(1).max(200), nouveau: passwordSchema }), req.body);
   const row = await one('SELECT password_hash FROM contacts WHERE id = $1', [req.user!.id]);
   if (!row?.password_hash || !(await bcrypt.compare(p.ancien, row.password_hash))) throw new HttpError(400, 'Mot de passe actuel incorrect');
-  await q('UPDATE contacts SET password_hash = $1, updated_at = now() WHERE id = $2', [await bcrypt.hash(p.nouveau, 12), req.user!.id]);
+  await q(`UPDATE contacts SET password_hash = $1, password_changed_at = date_trunc('second', now()), updated_at = now() WHERE id = $2`, [await hashPassword(p.nouveau), req.user!.id]);
+  await q('DELETE FROM password_resets WHERE contact_id = $1', [req.user!.id]);
+  startSession(res, { id: req.user!.id });
   res.json({ ok: true });
 }));
 
@@ -78,19 +101,23 @@ r.post('/forgot', wrap(async (req, res) => {
   const row = await one('SELECT id FROM contacts WHERE email = $1 AND password_hash IS NOT NULL', [p.email.toLowerCase()]);
   let devLink: string | undefined;
   if (row) {
-    const token = crypto.randomBytes(24).toString('hex');
-    await q(`INSERT INTO password_resets (token, contact_id, expires_at) VALUES ($1, $2, now() + interval '1 hour')`, [token, row.id]);
-    devLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/mon-compte/reinitialiser?token=${token}`;
-    console.log(`[mot de passe oublié] ${p.email}: ${devLink}`);
+    const token = crypto.randomBytes(32).toString('hex');
+    await q('DELETE FROM password_resets WHERE contact_id = $1 OR expires_at < now()', [row.id]);
+    await q(`INSERT INTO password_resets (token_hash, contact_id, expires_at) VALUES ($1, $2, now() + interval '1 hour')`, [sha256(token), row.id]);
+    if (config.devResetLink) {
+      devLink = `${config.frontendUrl}/mon-compte/reinitialiser?token=${token}`;
+      console.log(`[dev] lien de réinitialisation pour ${p.email}: ${devLink}`);
+    }
   }
-  res.json({ ok: true, ...(process.env.NODE_ENV !== 'production' && devLink ? { lien_dev: devLink } : {}) });
+  res.json({ ok: true, ...(devLink ? { lien_dev: devLink } : {}) });
 }));
 
 r.post('/reset', wrap(async (req, res) => {
-  const p = parse(z.object({ token: z.string().min(10), password: z.string().min(8, '8 caractères minimum') }), req.body);
-  const row = await one('DELETE FROM password_resets WHERE token = $1 AND expires_at > now() RETURNING contact_id', [p.token]);
+  const p = parse(z.object({ token: z.string().regex(/^[a-f0-9]{64}$/, 'Lien expiré ou invalide'), password: passwordSchema }), req.body);
+  const row = await one('DELETE FROM password_resets WHERE token_hash = $1 AND expires_at > now() RETURNING contact_id', [sha256(p.token)]);
   if (!row) throw new HttpError(400, 'Lien expiré ou invalide');
-  await q('UPDATE contacts SET password_hash = $1, updated_at = now() WHERE id = $2', [await bcrypt.hash(p.password, 12), row.contact_id]);
+  await q(`UPDATE contacts SET password_hash = $1, password_changed_at = date_trunc('second', now()), updated_at = now() WHERE id = $2`, [await hashPassword(p.password), row.contact_id]);
+  await q('DELETE FROM password_resets WHERE contact_id = $1', [row.contact_id]);
   res.json({ ok: true });
 }));
 

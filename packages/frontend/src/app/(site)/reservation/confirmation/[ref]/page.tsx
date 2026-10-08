@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import useSWR from 'swr';
+import { useParams } from 'next/navigation';
 import { CalendarDays, CheckCircle2, Clock3, FileText, MapPin, Plane, UserRound } from 'lucide-react';
 import { useAuth } from '@/components/providers';
 import { Alert, Badge, LinkButton, Loading } from '@/components/ui';
@@ -9,7 +10,8 @@ import { api } from '@/lib/api';
 import { dateHeure, euro, MODE_PAIEMENT, STATUT_COMMANDE } from '@/lib/format';
 import type { Commande } from '@/lib/types';
 
-export default function Confirmation({ params }: { params: { ref: string } }) {
+export default function Confirmation() {
+  const params = useParams<{ ref: string }>();
   const { user, ready } = useAuth();
   const { data: c, error } = useSWR<Commande>(ready && user ? `/compte/commandes/${params.ref}` : null, (p: string) => api(p));
   const { data: instr } = useSWR<{ adresse_cheque: string[]; banque: { titulaire: string; iban: string; bic: string } }>('/reservations/instructions', (p: string) => api(p));

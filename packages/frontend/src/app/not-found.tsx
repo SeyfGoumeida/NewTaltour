@@ -12,8 +12,8 @@ const links = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export default function NotFound() {
-  const site = currentSite();
+export default async function NotFound() {
+  const site = await currentSite();
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-line bg-ink-900/80 backdrop-blur-xl">

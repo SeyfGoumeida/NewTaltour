@@ -21,8 +21,8 @@ export default function AdminLogin({ denied }: { denied: boolean }) {
     setBusy(true);
     setErr(null);
     try {
-      const r = await api<{ token: string; user: User }>('/auth/login', { body: { email, password } });
-      setSession(r.token, r.user);
+      const r = await api<{ user: User }>('/auth/login', { body: { email, password } });
+      setSession(r.user);
       if (r.user.role !== 10) setErr('Accès réservé aux administrateurs');
     } catch (e) {
       setErr(errMsg(e));

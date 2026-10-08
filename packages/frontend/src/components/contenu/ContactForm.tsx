@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { Alert, Button, Field, Input, Textarea } from '@/components/ui';
 import { api } from '@/lib/api';
+import { useHoneypot } from '@/components/Honeypot';
 
 interface Values { email: string; nom: string; prenom: string; tel: string; message: string }
 
@@ -16,6 +17,7 @@ export default function ContactForm({ defaultMessage = '', onSent, submitLabel =
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const hp = useHoneypot();
 
   const set = (k: keyof Values) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setV((s) => ({ ...s, [k]: e.target.value }));
 
@@ -30,7 +32,7 @@ export default function ContactForm({ defaultMessage = '', onSent, submitLabel =
     setBusy(true);
     setError(null);
     try {
-      await api('/contact', { body: { email: v.email.trim(), nom: v.nom.trim(), prenom: v.prenom.trim() || null, tel: v.tel.trim() || null, message: v.message.trim() } });
+      await api('/contact', { body: { email: v.email.trim(), nom: v.nom.trim(), prenom: v.prenom.trim() || null, tel: v.tel.trim() || null, message: v.message.trim(), website: hp.value() } });
       setSent(true);
       onSent?.();
     } catch (err) {
@@ -59,7 +61,8 @@ export default function ContactForm({ defaultMessage = '', onSent, submitLabel =
     );
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-4">
+    <form onSubmit={submit} noValidate className="relative grid gap-4">
+      {hp.field}
       {error && <Alert tone="danger">{error}</Alert>}
       <Field label="Email" required error={errors.email}>
         <Input id={`${idPrefix}-email`} type="email" autoComplete="email" value={v.email} onChange={set('email')} aria-invalid={!!errors.email} required />

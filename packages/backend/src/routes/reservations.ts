@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import bcrypt from 'bcrypt';
 import { z } from 'zod';
 import { tx, one } from '../db';
 import { HttpError, parse, siteOf, toDate, wrap } from '../lib/http';
-import { optionalAuth, signToken } from '../lib/auth';
+import { optionalAuth, startSession } from '../lib/auth';
+import { config } from '../config';
 import { buildQuote, insertBooking, loadCtx } from '../services/booking';
-import { PROFILE_COLUMNS, profileSchema } from './auth';
+import { hashPassword, PROFILE_COLUMNS, profileSchema } from './auth';
 
 const r = Router();
 
@@ -21,7 +21,7 @@ const bookingSchema = profileSchema.extend({
   mode_paiement: z.enum(['cb', 'paypal', 'cheque', 'virement', 'deux_fois']),
   email: z.email('Email invalide'),
   email_confirmation: z.string(),
-  password: z.string().optional().nullable(),
+  password: z.string().max(72, '72 caractères maximum').optional().nullable(),
   num_vol: z.string().trim().max(30).optional().nullable(),
   remarques: z.string().trim().max(2000).optional().nullable(),
   cgv: z.literal(true, { message: 'Vous devez accepter les conditions générales de vente' }),
@@ -33,6 +33,8 @@ r.post('/', optionalAuth, wrap(async (req, res) => {
   const p = parse(bookingSchema, req.body);
   const email = p.email.toLowerCase();
   if (email !== p.email_confirmation.trim().toLowerCase()) throw new HttpError(400, 'Les deux adresses email ne correspondent pas');
+  if (!config.simulatedPayments && ['cb', 'paypal', 'deux_fois'].includes(p.mode_paiement))
+    throw new HttpError(503, "Le paiement en ligne n'est pas encore disponible : choisissez le chèque ou le virement bancaire.");
   const site = siteOf(req);
   const ctx = await loadCtx();
 
@@ -47,7 +49,7 @@ r.post('/', optionalAuth, wrap(async (req, res) => {
       if ((await c.query('SELECT 1 FROM contacts WHERE email = $1', [email])).rowCount)
         throw new HttpError(409, 'Déjà client ? Un compte existe avec cet email, connectez-vous pour finaliser votre réservation.');
       if (!p.password || p.password.length < 8) throw new HttpError(400, 'Choisissez un mot de passe (8 caractères minimum) pour accéder à votre compte client');
-      const hash = await bcrypt.hash(p.password, 12);
+      const hash = await hashPassword(p.password);
       newUser = (await c.query(`INSERT INTO contacts (nom, prenom, tel, societe, adresse, code_postal, commune, pays, num_permis, date_permis, date_naissance, email, password_hash)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING ${PROFILE_COLUMNS}`, [...profile, email, hash])).rows[0];
       contactId = newUser.id;
@@ -64,10 +66,8 @@ r.post('/', optionalAuth, wrap(async (req, res) => {
     return { ...booking, newUser };
   });
 
-  res.status(201).json({
-    reference: result.reference,
-    ...(result.newUser ? { token: signToken(result.newUser), user: result.newUser } : {}),
-  });
+  if (result.newUser) startSession(res, result.newUser);
+  res.status(201).json({ reference: result.reference, ...(result.newUser ? { user: result.newUser } : {}) });
 }));
 
 r.get('/instructions', wrap(async (_req, res) => {

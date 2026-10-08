@@ -8,6 +8,7 @@ import { useAuth } from '@/components/providers';
 import { EmptyRow, errMsg, KV, PageHead, PaiementBadge, rowCls, StatutBadge, TableBox, Td, Th, useAdmin, useToast } from '@/components/admin/kit';
 import { Alert, Badge, Button, Card, CardTitle, Field, Input, Loading, Modal, Select, Stars, Stat, Textarea } from '@/components/ui';
 import { dateFr, euro } from '@/lib/format';
+import { useParams } from 'next/navigation';
 
 const EDIT_KEYS = ['prenom', 'nom', 'tel', 'societe', 'adresse', 'code_postal', 'commune', 'pays', 'num_permis', 'date_permis', 'date_naissance'] as const;
 const LABELS: Record<string, string> = {
@@ -15,7 +16,8 @@ const LABELS: Record<string, string> = {
   num_permis: 'N° de permis', date_permis: 'Date du permis', date_naissance: 'Date de naissance',
 };
 
-export default function ClientDetail({ params }: { params: { id: string } }) {
+export default function ClientDetail() {
+  const params = useParams<{ id: string }>();
   const toast = useToast();
   const { user } = useAuth();
   const { data: c, error, isLoading, mutate } = useAdmin<any>(`/admin/contacts/${params.id}`);

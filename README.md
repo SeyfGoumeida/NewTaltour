@@ -29,9 +29,9 @@ npm run dev         # API sur :3001, site sur :3000
 
 | Rôle | Email | Mot de passe |
 | --- | --- | --- |
-| Administrateur | admin@taltour.com | Admin2026! |
-| Client démo (réservations dans tous les états, avoir, fidélité) | client@taltour.com | Client2026! |
-| Autres clients (90 comptes `@example.com`) | voir la table `contacts` | Taltour2026! |
+| Administrateur | `admin@taltour.com` | `Admin2026!` |
+| Client démo (réservations dans tous les états, avoir, fidélité) | `client@taltour.com` | `Client2026!` |
+| Autres clients (90 comptes `@example.com`) | voir la table `contacts` | `Taltour2026!` |
 
 Codes promo de démo : `BIENVENUE10`, `TALTOUR2026`, `FIDELE15` (actifs), `ETE2025`, `AID2026` (expirés), `PARTENAIRE20` (désactivé).
 
@@ -65,6 +65,29 @@ Les noms d'agents et numéros d'agents par ville ainsi que l'IBAN sont des valeu
 - **Paiement** : CB, PayPal, chèque, virement, ou en deux fois (acompte PayPal + solde en espèces). Le paiement en ligne est simulé en local.
 
 Tous les paramètres sont modifiables dans `/admin/parametres`.
+
+## Sécurité et mise en production
+
+En dehors de `NODE_ENV=development`, l'API applique automatiquement :
+
+- refus de démarrer sans `JWT_SECRET` d'au moins 32 caractères (`openssl rand -hex 32`) ou avec un `FRONTEND_URL` en http ;
+- seed de démo bloqué (il efface la base) ;
+- lien de réinitialisation du mot de passe jamais renvoyé par l'API ;
+- paiements CB / PayPal / en deux fois désactivés tant qu'un prestataire de paiement n'est pas branché (`SIMULATED_PAYMENTS` ne doit jamais valoir `true` en production) ;
+- cookie de session `Secure` et en-tête HSTS.
+
+Protections actives dans tous les cas :
+
+- session dans un cookie `HttpOnly; SameSite=Lax` (aucun jeton lisible par JavaScript), invalidée au changement de mot de passe ;
+- en-tête `x-requested-with` obligatoire sur les requêtes qui modifient des données (protection CSRF) ;
+- limitation des tentatives (connexion, inscription, mot de passe oublié, réservations, formulaires) et champs pièges anti-robots ;
+- Content-Security-Policy avec nonce, anti-iframe, `nosniff` sur le site (`src/proxy.ts`, `next.config.js`) et via helmet sur l'API ;
+- jetons de réinitialisation à usage unique, valables 1 h, stockés hachés ;
+- PostgreSQL et Redis accessibles uniquement depuis la machine locale (`docker-compose.yml`).
+
+Variables à renseigner : voir `packages/backend/.env.example` (`JWT_SECRET`, `FRONTEND_URL`, `COOKIE_DOMAIN`, `TRUST_PROXY`). Les comptes de démo ne doivent jamais exister en production.
+
+Reste à faire avant d'encaisser en ligne : brancher un prestataire de paiement (Paybox, PayPal, Stripe…) avec validation côté serveur, et ajouter une double authentification pour les administrateurs.
 
 ## Scripts
 

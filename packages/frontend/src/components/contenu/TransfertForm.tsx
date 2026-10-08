@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { Alert, Button, Field, Input, Select, Textarea } from '@/components/ui';
 import { api } from '@/lib/api';
+import DateTimePicker from '@/components/DateTimePicker';
+import { defaultDates } from '@/lib/format';
+import { useHoneypot } from '@/components/Honeypot';
 
 interface Values {
   nom: string;
@@ -22,12 +25,13 @@ type Errors = Partial<Record<keyof Values, string>>;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function TransfertForm({ aeroports }: { aeroports: { id: number; nom: string }[] }) {
-  const empty: Values = { nom: '', email: '', tel: '', aeroport_id: aeroports.length === 1 ? String(aeroports[0].id) : '', destination: '', date_arrivee: '', passagers: '1', num_vol: '', message: '' };
+  const empty: Values = { nom: '', email: '', tel: '', aeroport_id: aeroports.length === 1 ? String(aeroports[0].id) : '', destination: '', date_arrivee: defaultDates().date_depart, passagers: '1', num_vol: '', message: '' };
   const [v, setV] = useState<Values>(empty);
   const [errors, setErrors] = useState<Errors>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const hp = useHoneypot();
 
   const set = (k: keyof Values) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setV((s) => ({ ...s, [k]: e.target.value }));
 
@@ -57,6 +61,7 @@ export default function TransfertForm({ aeroports }: { aeroports: { id: number; 
           passagers: p,
           num_vol: v.num_vol.trim() || null,
           message: v.message.trim() || null,
+          website: hp.value(),
         },
       });
       setSent(true);
@@ -86,7 +91,8 @@ export default function TransfertForm({ aeroports }: { aeroports: { id: number; 
     );
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-4">
+    <form onSubmit={submit} noValidate className="relative grid gap-4">
+      {hp.field}
       {error && <Alert tone="danger">{error}</Alert>}
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nom" required error={errors.nom}>
@@ -112,7 +118,8 @@ export default function TransfertForm({ aeroports }: { aeroports: { id: number; 
       </Field>
       <div className="grid gap-4 sm:grid-cols-3">
         <Field label="Date et heure d'arrivée" required error={errors.date_arrivee} className="sm:col-span-1">
-          <Input type="datetime-local" value={v.date_arrivee} onChange={set('date_arrivee')} aria-invalid={!!errors.date_arrivee} required />
+          <DateTimePicker variant="dark" label="Date et heure d'arrivée" value={v.date_arrivee} min={new Date().toISOString().slice(0, 10)}
+            onChange={(d) => setV((s) => ({ ...s, date_arrivee: d }))} />
         </Field>
         <Field label="Passagers" required error={errors.passagers}>
           <Input type="number" inputMode="numeric" min={1} max={50} value={v.passagers} onChange={set('passagers')} aria-invalid={!!errors.passagers} required />

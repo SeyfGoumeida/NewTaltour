@@ -34,6 +34,7 @@ export interface SiteInfo {
   };
   conducteur: Record<string, number>;
   stats: { avis: number; note: number; modeles: number };
+  paiement_en_ligne: boolean;
 }
 
 export interface Tarif { jours: number; prix: number }

@@ -58,8 +58,8 @@ function LoginModal({ open, onClose, email }: { open: boolean; onClose: () => vo
     ev.preventDefault();
     setBusy(true); setErr(null);
     try {
-      const r = await api<{ token: string; user: User }>('/auth/login', { body: { email: e, password: p } });
-      setSession(r.token, r.user);
+      const r = await api<{ user: User }>('/auth/login', { body: { email: e, password: p } });
+      setSession(r.user);
       onClose();
     } catch (x) { setErr((x as Error).message); } finally { setBusy(false); }
   };
@@ -99,7 +99,7 @@ export default function Booking() {
   const [promoError, setPromoError] = useState<string | null>(null);
   const [goldWarning, setGoldWarning] = useState<string | null>(null);
   const [useAvoir, setUseAvoir] = useState(false);
-  const [mode, setMode] = useState<ModePaiement>('cb');
+  const [mode, setMode] = useState<ModePaiement>(site.paiement_en_ligne ? 'cb' : 'virement');
   const [cgv, setCgv] = useState(false);
   const [touched, setTouched] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
@@ -180,10 +180,10 @@ export default function Booking() {
     if (!cgv) return setSubmitError('Vous devez accepter les conditions générales de vente');
     setSubmitting(true); setSubmitError(null);
     try {
-      const r = await api<{ reference: string; token?: string; user?: User }>('/reservations', {
+      const r = await api<{ reference: string; user?: User }>('/reservations', {
         body: { ...quoteBody, ...form, password: user ? null : form.password, mode_paiement: mode, cgv: true, date_naissance: form.date_naissance, date_permis: form.date_permis },
       });
-      if (r.token && r.user) setSession(r.token, r.user);
+      if (r.user) setSession(r.user);
       router.push(`/reservation/confirmation/${r.reference}`);
     } catch (x) {
       const msg = (x as Error).message;
@@ -299,15 +299,21 @@ export default function Booking() {
               <h2 className="text-xl font-bold">Mon paiement</h2>
               <h3 className="mt-6 text-sm font-semibold text-soft">Paiement intégral :</h3>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {payCard('cb', <CreditCard className="h-5 w-5" />, 'CB', 'Paiement sécurisé, réservation confirmée immédiatement')}
-                {payCard('paypal', <Wallet className="h-5 w-5" />, 'PAYPAL', 'Payez avec votre compte PayPal')}
+                {site.paiement_en_ligne && payCard('cb', <CreditCard className="h-5 w-5" />, 'CB', 'Paiement sécurisé, réservation confirmée immédiatement')}
+                {site.paiement_en_ligne && payCard('paypal', <Wallet className="h-5 w-5" />, 'PAYPAL', 'Payez avec votre compte PayPal')}
                 {payCard('cheque', <FileSignature className="h-5 w-5" />, 'Chèque', 'Réservation valide dès réception du chèque')}
                 {payCard('virement', <Landmark className="h-5 w-5" />, 'Virement bancaire', 'Réservation valide dès réception du virement')}
               </div>
-              <h3 className="mt-6 text-sm font-semibold text-soft">Paiement en deux fois : (solde à régler en espèces à votre arrivée)</h3>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {payCard('deux_fois', <Banknote className="h-5 w-5" />, 'PAYPAL', devis ? `${euro(acompte)} maintenant, ${euro(r2(devis.montant_total - acompte))} en espèces à l'arrivée` : '')}
-              </div>
+              {site.paiement_en_ligne ? (
+                <>
+                  <h3 className="mt-6 text-sm font-semibold text-soft">Paiement en deux fois : (solde à régler en espèces à votre arrivée)</h3>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {payCard('deux_fois', <Banknote className="h-5 w-5" />, 'PAYPAL', devis ? `${euro(acompte)} maintenant, ${euro(r2(devis.montant_total - acompte))} en espèces à l'arrivée` : '')}
+                  </div>
+                </>
+              ) : (
+                <Alert tone="info" className="mt-4">Le paiement en ligne par carte et PayPal sera bientôt disponible. Réglez par chèque ou virement bancaire.</Alert>
+              )}
               {(mode === 'cb' || mode === 'paypal' || mode === 'deux_fois') && (
                 <Alert tone="info" className="mt-4">Environnement de démonstration : le paiement {mode === 'cb' ? 'par carte' : 'PayPal'} est simulé, aucune donnée bancaire n&apos;est demandée.</Alert>
               )}

@@ -4,6 +4,7 @@ import { pool, q, one, tx } from '../db';
 import { HttpError, parse, round2, wrap } from '../lib/http';
 import { requireAuth } from '../lib/auth';
 import { loadSettings } from '../lib/settings';
+import { config } from '../config';
 import { bookingDetail, buildQuote, cancelBooking, loadCtx } from '../services/booking';
 import { cancellationTerms } from '../services/pricing';
 
@@ -42,6 +43,7 @@ r.get('/commandes/:ref', wrap(async (req, res) => res.json(await own(req.params.
 
 r.post('/commandes/:ref/payer', wrap(async (req, res) => {
   const p = parse(z.object({ mode: z.enum(['cb', 'paypal']) }), req.body);
+  if (!config.simulatedPayments) throw new HttpError(503, "Le paiement en ligne n'est pas encore disponible : réglez par chèque, virement ou auprès de notre agent.");
   const b = await own(req.params.ref, req.user!.id);
   if (b.statut === 'annulee' || b.statut === 'terminee') throw new HttpError(400, 'Cette réservation ne peut plus être payée');
   const reste = round2(Number(b.montant_total) - Number(b.montant_paye));

@@ -96,7 +96,7 @@ export default function BookingDetail({ reference }: { reference: string }) {
   const vRetour = villes.find((v) => v.id === c.ville_retour_id);
   const { total, paye, reste } = totals(c);
   const cancelled = c.statut === 'annulee';
-  const canPay = reste > 0 && !cancelled && c.statut !== 'terminee';
+  const canPay = site.paiement_en_ligne && reste > 0 && !cancelled && c.statut !== 'terminee';
   const canModify = modifiable(c);
   const gold = hasOption(c, 'gold');
   const caution = cautionText(c, site.tarification.reserve_gold);

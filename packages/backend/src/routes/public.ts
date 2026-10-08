@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { pool, q, one } from '../db';
 import { HttpError, page, parse, siteOf, toDate, wrap } from '../lib/http';
 import { optionalAuth } from '../lib/auth';
+import { config } from '../config';
 import { loadCtx, loadModels, search, buildQuote } from '../services/booking';
 
 const r = Router();
@@ -18,7 +19,7 @@ r.get('/site', wrap(async (req, res) => {
   const stats = await one(`SELECT (SELECT count(*) FROM avis WHERE publie)::int AS avis, (SELECT round(avg(note)::numeric, 1) FROM avis WHERE publie) AS note,
     (SELECT count(*) FROM modeles WHERE actif AND site = $1)::int AS modeles`, [site]);
   const { banque, ...entreprise } = p.entreprise;
-  res.json({ ...s, villes, entreprise, tarification: p.tarification, conducteur: p.conducteur, stats });
+  res.json({ ...s, villes, entreprise, tarification: p.tarification, conducteur: p.conducteur, stats, paiement_en_ligne: config.simulatedPayments });
 }));
 
 r.get('/modeles', wrap(async (req, res) => {
@@ -119,10 +120,12 @@ const contactSchema = z.object({
   prenom: z.string().trim().max(100).optional().nullable(),
   tel: z.string().trim().max(30).optional().nullable(),
   message: z.string().trim().min(1, 'obligatoire').max(5000),
+  website: z.string().optional(),
 });
 
 r.post('/contact', wrap(async (req, res) => {
   const p = parse(contactSchema, req.body);
+  if (p.website) return res.status(201).json({ ok: true });
   await q('INSERT INTO messages_contact (email, nom, prenom, tel, message) VALUES ($1,$2,$3,$4,$5)', [p.email, p.nom, p.prenom ?? null, p.tel ?? null, p.message]);
   res.status(201).json({ ok: true });
 }));
@@ -137,12 +140,16 @@ const transfertSchema = z.object({
   passagers: z.coerce.number().int().min(1).max(50),
   num_vol: z.string().trim().max(30).optional().nullable(),
   message: z.string().trim().max(3000).optional().nullable(),
+  website: z.string().optional(),
 });
 
 r.post('/transfert', wrap(async (req, res) => {
   const p = parse(transfertSchema, req.body);
+  if (p.website) return res.status(201).json({ ok: true });
+  const arrivee = toDate(p.date_arrivee);
+  if (isNaN(arrivee.getTime())) throw new HttpError(400, "Date d'arrivée invalide");
   await q(`INSERT INTO demandes_transfert (nom, email, tel, aeroport_id, destination, date_arrivee, passagers, num_vol, message) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
-    [p.nom, p.email, p.tel ?? null, p.aeroport_id, p.destination, toDate(p.date_arrivee), p.passagers, p.num_vol ?? null, p.message ?? null]);
+    [p.nom, p.email, p.tel ?? null, p.aeroport_id, p.destination, arrivee, p.passagers, p.num_vol ?? null, p.message ?? null]);
   res.status(201).json({ ok: true });
 }));
 

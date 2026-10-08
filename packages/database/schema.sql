@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS contacts (
     date_permis DATE,
     date_naissance DATE,
     password_hash VARCHAR(255),
+    password_changed_at TIMESTAMPTZ,
     role INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -277,7 +278,7 @@ CREATE TABLE IF NOT EXISTS parametres (
 );
 
 CREATE TABLE IF NOT EXISTS password_resets (
-    token VARCHAR(100) PRIMARY KEY,
+    token_hash CHAR(64) PRIMARY KEY,
     contact_id INTEGER NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
     expires_at TIMESTAMPTZ NOT NULL
 );

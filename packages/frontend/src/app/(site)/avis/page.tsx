@@ -18,7 +18,8 @@ export const metadata: Metadata = {
 
 const SIZE = 30;
 
-export default async function AvisPage({ searchParams }: { searchParams: { page?: string; note?: string; commentaires?: string } }) {
+export default async function AvisPage(props: { searchParams: Promise<{ page?: string; note?: string; commentaires?: string }> }) {
+  const searchParams = await props.searchParams;
   const page = Math.max(1, parseInt(searchParams.page || '1', 10) || 1);
   const noteN = parseInt(searchParams.note || '', 10);
   const note = noteN >= 1 && noteN <= 5 ? noteN : undefined;

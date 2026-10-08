@@ -13,13 +13,13 @@ type Detail = Article & { recents: ArticleLite[] };
 
 const load = (slug: string) => sapi<Detail>(`/articles/${encodeURIComponent(slug)}`, { notFoundOn404: true });
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const a = await load(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const a = await load((await params).slug);
   return { title: a.titre, description: excerpt(a.contenu, 160) };
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
-  const a = await load(params.slug);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const a = await load((await params).slug);
   return (
     <>
       <section className="border-b border-line bg-gradient-to-b from-ink-850/60 to-transparent">

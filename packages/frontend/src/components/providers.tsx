@@ -2,13 +2,13 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { api, TOKEN_KEY } from '@/lib/api';
+import { api } from '@/lib/api';
 import type { SiteInfo, User } from '@/lib/types';
 
 interface AuthCtx {
   user: User | null;
   ready: boolean;
-  setSession: (token: string, user: User) => void;
+  setSession: (user: User) => void;
   setUser: (u: User) => void;
   logout: () => void;
 }
@@ -21,33 +21,17 @@ export function Providers({ site, children }: { site: SiteInfo; children: React.
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    let t: string | null = null;
-    try {
-      t = localStorage.getItem(TOKEN_KEY);
-    } catch {}
-    if (!t) return setReady(true);
-    api<User>('/auth/me')
-      .then(setUser)
-      .catch(() => {
-        try {
-          localStorage.removeItem(TOKEN_KEY);
-        } catch {}
-      })
+    api<{ user: User | null }>('/auth/session')
+      .then((r) => setUser(r.user))
+      .catch(() => setUser(null))
       .finally(() => setReady(true));
   }, []);
 
-  const setSession = useCallback((token: string, u: User) => {
-    try {
-      localStorage.setItem(TOKEN_KEY, token);
-    } catch {}
-    setUser(u);
-  }, []);
+  const setSession = useCallback((u: User) => setUser(u), []);
 
   const logout = useCallback(() => {
-    try {
-      localStorage.removeItem(TOKEN_KEY);
-    } catch {}
     setUser(null);
+    api('/auth/logout', { method: 'POST' }).catch(() => undefined);
   }, []);
 
   const value = useMemo(() => ({ user, ready, setSession, setUser, logout }), [user, ready, setSession, logout]);

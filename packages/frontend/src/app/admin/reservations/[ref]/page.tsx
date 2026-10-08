@@ -10,6 +10,7 @@ import { ConfirmModal, errMsg, KV, PageHead, PaiementBadge, StatutBadge, Thumb, 
 import { Alert, Badge, Button, Card, CardTitle, Field, Input, Loading, Modal, Select, Stars, Textarea } from '@/components/ui';
 import { dateFr, dateHeure, dateLong, euro, heureFr, MODE_PAIEMENT, STATUT_COMMANDE } from '@/lib/format';
 import type { Commande } from '@/lib/types';
+import { useParams } from 'next/navigation';
 
 type Detail = Commande & {
   vehicules_disponibles: { id: number; immatriculation: string; annee: number; ville: string }[];
@@ -52,7 +53,8 @@ function PriceRow({ label, value, minus, strong, muted }: { label: React.ReactNo
   );
 }
 
-export default function ReservationDetail({ params }: { params: { ref: string } }) {
+export default function ReservationDetail() {
+  const params = useParams<{ ref: string }>();
   const ref = decodeURIComponent(params.ref);
   const toast = useToast();
   const site = useSite();

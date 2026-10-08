@@ -13,7 +13,6 @@ export default async function Home() {
     sapi<Modele[]>('/modeles'),
     sapi<Paged<Avis> & { moyenne: number; nombre: number }>('/avis?commentaires=1&size=6'),
   ]);
-  const hero = modeles.find((m) => m.slug === 'chery-tiggo-7-pro') ?? modeles[modeles.length - 1];
   const airports = site.villes.filter((v) => v.aeroport);
   const isMa = site.code === 'ma';
 
@@ -21,13 +20,16 @@ export default async function Home() {
     <>
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
-          {hero?.image && (
-            <img src={hero.image} alt="" className="absolute right-0 top-0 h-full w-full object-cover opacity-40 [mask-image:linear-gradient(90deg,transparent_5%,black_55%)] lg:w-[68%]" />
-          )}
+          <img src="/hero/tucson-scene.jpg" alt=""
+            className="absolute right-0 top-0 h-full w-full object-cover object-[30%_40%] opacity-60 [mask-image:linear-gradient(90deg,transparent_0%,black_40%)] lg:w-[68%] 2xl:w-[58%]" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/40 to-transparent" />
           <div className="absolute -right-40 top-10 h-[420px] w-[620px] rounded-full bg-brand-blue/25 blur-[120px]" />
         </div>
         <div className="container-x relative pb-14 pt-14 sm:pt-20 lg:pb-20">
+          <a href="https://commons.wikimedia.org/wiki/File:Hyundai_Tucson_N_Line_NX4_Phantom_Black_Pearl_(1).jpg" target="_blank" rel="noopener noreferrer"
+            className="absolute bottom-2 right-4 z-10 text-[10px] text-white/30 hover:text-white/70 sm:right-6 lg:right-8">
+            Photo : Damian B Oh, CC BY-SA 4.0 (modifiée)
+          </a>
           <div className="max-w-2xl animate-fade-up">
             <Eyebrow>Service de qualité depuis {site.entreprise.depuis}</Eyebrow>
             <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">

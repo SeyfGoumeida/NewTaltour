@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 const byline = (a: Article) => `Le ${dateFr(a.date_publication)}${a.auteur ? ` par ${a.auteur}` : ''}`;
 
-export default async function ActusPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function ActusPage(props: { searchParams: Promise<{ page?: string }> }) {
+  const searchParams = await props.searchParams;
   const page = Math.max(1, parseInt(searchParams.page || '1', 10) || 1);
   const [data, recents] = await Promise.all([
     sapi<Paged<Article>>(`/articles?page=${page}`),

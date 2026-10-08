@@ -47,6 +47,8 @@ const AGENTS = ['Karim B.', 'Yacine H.', 'Sofiane M.', 'Nadia C.', 'Amine B.', '
 const CITY_WEIGHT: Record<string, number> = { Alger: 30, Oran: 16, Constantine: 10, Bejaia: 9, Setif: 7, Tlemcen: 6, Annaba: 5, Batna: 4, Jijel: 4, Skikda: 3, Biskra: 3, Chlef: 3, Marrakech: 6 };
 
 async function main() {
+  if (process.env.NODE_ENV !== 'development' && process.env.ALLOW_DEMO_SEED !== 'yes')
+    throw new Error("Le seed efface toute la base et crée des comptes de démo : il ne s'exécute qu'avec NODE_ENV=development (ou ALLOW_DEMO_SEED=yes).");
   const content = read('content.json');
   const modelsDz = read('models.json');
   const modelsMa = read('models_maroc.json');
