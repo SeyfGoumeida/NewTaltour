@@ -24,7 +24,7 @@ export default function AdminVehiclesPage() {
     }
   };
 
-  const handleToggleAvailability = async (vehicleId: number, currentStatus: boolean) => {
+  const handleToggleAvailability = async (vehicleId: number) // currentStatus: boolean => {
     try {
       // This would call the API to update availability
       // await adminAPI.updateVehicleAvailability(vehicleId, !currentStatus);
